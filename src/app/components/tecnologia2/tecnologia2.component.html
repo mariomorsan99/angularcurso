@@ -1,0 +1,17 @@
+<div class="card-group animated fadeIn slow" style="width: 80rem;">
+    <div class="card" *ngFor="let itemProducto of productos; let i= index">
+        <img [src]="itemProducto.imagenProducto" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{itemProducto.nombreProducto}}</h5>
+            <p class="card-text"></p>
+            <p class="card-text"><small class="text-muted">{{itemProducto.descripcionProducto}}</small></p>
+            <p class="card-text"><small class="text-muted">{{itemProducto.precioProducto}}</small></p>
+
+
+            <button type="button" (click)="VerProducto(i)" class="btn btn-info">Ver Producto</button>
+
+            <a [routerLink]="['/itemProducto',i]" routerLinkActive="router-link-active" class="btn btn-primary">Ver Mas</a>
+
+        </div>
+    </div>
+</div>
