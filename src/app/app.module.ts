@@ -15,6 +15,14 @@ import { LoginComponent } from './components/login/login.component';
 //google
 import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
 import { AuthGuard } from './auth.guard';
+import { TiendaService } from './servicios/tienda.service';
+
+import { HttpClientModule  } from "@angular/common/http";
+import { GraphQLModule } from './graphql.module';
+import { GraphProductoComponent } from './components/graph-producto/graph-producto.component';
+import { GraphqlService } from './servicios/graphql.service';
+
+//apollo
 
 @NgModule({
   declarations: [
@@ -23,14 +31,16 @@ import { AuthGuard } from './auth.guard';
     FooterComponent,
     HomeComponent,
     TecnologiaComponent,
-    Tecnologia2Component,    
-    ItemProductoComponent, LoginComponent,
-  
+    Tecnologia2Component,
+    ItemProductoComponent, LoginComponent, GraphProductoComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SocialLoginModule
+    SocialLoginModule,
+    HttpClientModule,
+    GraphQLModule
   ],
   providers: [
     {
@@ -45,8 +55,8 @@ import { AuthGuard } from './auth.guard';
         ]
       }
     },
-    
-    ProductosService, AuthGuard],
+
+    ProductosService,TiendaService, AuthGuard, GraphqlService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

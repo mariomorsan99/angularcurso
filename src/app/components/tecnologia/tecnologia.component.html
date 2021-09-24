@@ -3,6 +3,11 @@
     <div class="card-body">
         <h5 class="card-title">{{nombrePro}}</h5>
         <p class="card-text">{{descripcionPro}}</p>
-        <a href="#" class="btn btn-primary">Ver detalle</a>
+        <button type="button" (click)="setProductoTienda()" class="btn btn-info">Asignar Producto Nuevo</button>
+        <br>
+        <button type="button" (click)="getProductosTiendaId()" class="btn btn-warning">Ver Producto por Id</button>
+        <br>
+        <button type="button" (click)="deleteProductoId()" class="btn btn-danger">Eliminar por Id</button>
+
     </div>
 </div>
