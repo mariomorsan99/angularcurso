@@ -18,11 +18,16 @@ import { AuthGuard } from './auth.guard';
 import { TiendaService } from './servicios/tienda.service';
 
 import { HttpClientModule  } from "@angular/common/http";
-import { GraphQLModule } from './graphql.module';
+
 import { GraphProductoComponent } from './components/graph-producto/graph-producto.component';
 import { GraphqlService } from './servicios/graphql.service';
 
 //apollo
+import { GraphQLModule } from './graphql.module';
+
+import { FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -40,7 +45,8 @@ import { GraphqlService } from './servicios/graphql.service';
     AppRoutingModule,
     SocialLoginModule,
     HttpClientModule,
-    GraphQLModule
+    GraphQLModule,
+    FormsModule
   ],
   providers: [
     {

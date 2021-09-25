@@ -22,10 +22,11 @@
     "angularx-social-login": "^4.0.1",
     "apollo-angular": "^2.6.0",
     "bootstrap": "^5.1.0",
+    "graphql": "^15.0.0",
     "rxjs": "~6.6.0",
+    "sweetalert2": "^11.1.7",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4",
-    "graphql": "^15.0.0"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.3",

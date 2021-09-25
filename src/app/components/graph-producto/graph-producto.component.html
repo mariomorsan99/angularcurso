@@ -1,5 +1,67 @@
-<p>graph-producto works!</p>
-<br>
-<br>
-<br>
-<button type="button" (click)="setProducto()" class="btn btn-success">Asignar Producto Nuevo con GrapphQl</button>
+<h1>
+    CRUD PRODUCTOS GRAPHQL</h1>
+
+<form #myForm="ngForm" class="form-class" (ngSubmit)="setProducto(myForm.value)" novalidate>
+
+    <div class="form-group mb-2">
+        <div class="input-group">
+            <label for="staticEmail2" class="sr-only">Nombre del Producto</label>&nbsp; &nbsp;
+            <input [ngModel]="productoModel.nombre" name="nombre" type="text" class="form-control" placeholder="producto">
+        </div>
+    </div>
+    <div class="form-group mb-2">
+        <div class="input-group">
+            <label for="staticEmail2" class="sr-only">Descripcion del Producto</label>&nbsp; &nbsp;
+            <input [ngModel]="productoModel.descripcion" name="descripcion" pe="text" class="form-control" placeholder="descripcion">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <label for="staticEmail2" class="sr-only">ID del Producto</label>&nbsp; &nbsp;
+            <input [ngModel]="productoModel.id" name="id" pe="text" class="form-control" placeholder="descripcion">
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="submit" class="btn btn-primary">Guardar GrapphQl</button>
+        <button type="button" (click)="editProducto(myForm.value)" class="btn btn-secondary">Editar Producto</button>
+        <button type="button" (click)="resetFormValue(myForm)" class="btn btn-light">clear</button>
+        <button type="button" (click)="setDefault(myForm)" class="btn btn-dark">default</button>
+
+    </div>
+
+
+    <div *ngIf="loading==false">
+        <img class="img-center" src="../../../assets/imagenes/loading.gif" alt="">
+    </div>
+    <br>
+    <br>
+    <table class="table table-dark table-hover" *ngIf="loading==true">
+        <thead>
+            <tr>
+
+                <th scope="col">Id</th>
+                <th scope="col">Nombre Producto</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of products ; let i= index">
+
+                <td>{{item.id}}</td>
+                <td>
+                    {{item.nombreProducto}}
+                </td>
+                <td>
+                    {{item.descripcionProducto}}
+                </td>
+                <td>
+                    <button type="button" (click)=" deleteProducto(item) " class="btn btn-danger ">Eliminar Producto</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</form>

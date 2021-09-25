@@ -24,24 +24,30 @@ query{
 })
 export class GraphqlService {
 
-  products:Producto[]=[];
+  loading:boolean;
+  products:Array<any>
 
-  constructor(private apollo:Apollo) { }
+
+  constructor(private apollo:Apollo) {
+    this.products= [];
+    this.loading=false;
+  }
 
 
   getProductosGraphql():any  {
     console.log(queryConsulta);
 
+
     this.apollo.watchQuery<any>({
       query: queryConsulta
-  }).valueChanges.pipe(map(resp=>{
-    console.log(resp);
-    return resp;
-  })).subscribe((data)=>{
-     console.log(data);
-
+  }).valueChanges
+  .subscribe(({data, loading}) => {
+    this.loading = loading;
+    this.products = data.productos
+    console.log(this.products);
+    localStorage.setItem("productos",JSON.stringify(this.products));
+    return this.products;
   })
-
   }
 
   getProductosId(id:number):any{
@@ -70,14 +76,14 @@ export class GraphqlService {
 
   }
 
-  createProducto(nombreProducto:string, descripcionProducto:string): any{
+  createProducto(nombreProducto?:string, descripcionProducto?:string): any{
     console.log("entra ")
     const mutationCreateProducto=gql`
     mutation {
       createProducto(
         producto: {
-          nombreProducto: "matepad  2020"
-          descripcionProducto: "matepad 2020 pro"
+          nombreProducto: "${nombreProducto}"
+          descripcionProducto: "${descripcionProducto}"
         }
       ) {
         nombreProducto
@@ -94,10 +100,55 @@ export class GraphqlService {
        return data;
     })
 
+  }
 
+  deleteProduct(id?: number){
+    const mutationDelete=gql`
+    mutation {
+      deleteProducto(
+        id:${id}
+      ) {
+        nombreProducto
+      }
+    }
+    `;
+    console.log(mutationDelete);
 
+    this.apollo.mutate<any>({
+      mutation: mutationDelete
+  }).subscribe(data=>{
+     console.log(data);
+     return data;
+  })
+
+  }
+
+  alterProduct(nombreProducto?:string, descripcionProducto?:string, id?: number){
+    const mutationAlter=gql`
+    mutation {
+      editProducto(
+        producto: {
+          nombreProducto:"${nombreProducto}"
+          descripcionProducto:"${descripcionProducto}"
+        },
+        id:${id}
+      ) {
+        nombreProducto
+      }
+    }
+    `;
+
+    this.apollo.mutate<any>({
+      mutation: mutationAlter
+  }).subscribe(data=>{
+     console.log(data);
+     return data;
+  })
 
 
   }
+
+
+
 
 }
